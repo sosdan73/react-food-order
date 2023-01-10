@@ -24,10 +24,10 @@ const Checkout = props => {
 		const enteredPostal = postalInputRef.current.value;
 		const enteredCity = cityInputRef.current.value;
 
-		const enteredNameIsValid = isEmpty(enteredName)
-		const enteredStreetIsValid = isEmpty(enteredStreet)
-		const enteredPostalIsValid = isNotFiveChars(enteredPostal)
-		const enteredCityIsValid = isEmpty(enteredCity)
+		const enteredNameIsValid = !isEmpty(enteredName)
+		const enteredStreetIsValid = !isEmpty(enteredStreet)
+		const enteredPostalIsValid = !isNotFiveChars(enteredPostal)
+		const enteredCityIsValid = !isEmpty(enteredCity)
 
 		setFormInputValidity({
 			name: enteredNameIsValid,
@@ -46,6 +46,12 @@ const Checkout = props => {
 			return
 		}
 		console.log(enteredName, enteredStreet, enteredPostal, enteredCity);
+		props.onSubmit({
+			name: enteredName,
+			street: enteredStreet,
+			postal: enteredPostal,
+			city: enteredCity
+		})
 	}
 
 	return (
@@ -63,7 +69,7 @@ const Checkout = props => {
 			<div className={`${classes.control} ${formInputValidity.postal ? '' : classes.invalid}`}>
 				<label htmlFor="postal">Postal</label>
 				<input ref={postalInputRef} type="text" id="postal"/>
-				{!formInputValidity.postal && <p>Please input valid data</p>}
+				{!formInputValidity.postal && <p>Please input 5 digits</p>}
 			</div>
 			<div className={`${classes.control} ${formInputValidity.city ? '' : classes.invalid}`}>
 				<label htmlFor="city">City</label>
