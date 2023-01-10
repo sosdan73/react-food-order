@@ -22,6 +22,10 @@
     max-width: 100%;
 }
 
+.control p {
+    color: #ca3e51;
+}
+
 .actions {
     display: flex;
     justify-content: flex-end;
